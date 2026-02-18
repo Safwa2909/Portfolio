@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Safwa Portfolio</title>
+
+    <!-- Styled S logo font -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="nav">
+    <div class="logo">S</div>
+
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <p class="code">&lt;h1&gt;</p>
+        <div class="typing-container">
+             <h1 class="line line1">Hi!</h1>
+             <h1 class="line line2">I'm <span class="fancy-s">S</span>afwa,</h1>
+             <h1 class="line line3">Web Developer</h1>
+        </div>
+
+
+        <p class="code">&lt;/h1&gt;</p>
+
+        <a href="#contact" class="btn">CONTACT ME</a>
+    </div>
+</header>
+
+<section id="about">
+    <h2>About Me</h2>
+
+    <div class="about-container">
+        <div class="about-text">
+            <p>
+                I am a Computer Science Engineering student passionate about
+                web development and building meaningful applications.
+            </p>
+
+            <p>
+                I enjoy creating user-friendly websites using HTML, CSS,
+                JavaScript, and Python. I am currently improving my
+                full-stack development skills through projects and internships.
+            </p>
+
+            <p>
+                My goal is to become a skilled developer who builds
+                impactful and efficient digital solutions.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+        {% for skill in skills %}
+            <div class="skill-card">{{ skill }}</div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="projects">
+    <h2>Projects</h2>
+
+    <div class="projects">
+        {% for project in projects %}
+            <div class="card" onclick="openModal('{{ project[1] }}')">
+                <span class="tag">Web Project</span>
+                <h3>{{ project[1] }}</h3>
+                <p>{{ project[2] }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>{{ email }}</p>
+    <a href="{{ linkedin }}" target="_blank">LinkedIn</a>
+</section>
+
+<div id="projectModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc"></p>
+        <p><strong>Tech Stack:</strong> HTML, CSS, JavaScript, Flask</p>
+        <a id="githubLink" target="_blank" class="btn">GitHub</a>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+const projectData = {
+    "MyLife Hub": {
+        desc: "Personal dashboard web application.",
+        github: "https://github.com/Safwa2909/MyLife-Hub"
+    },
+    "Campus Bites": {
+        desc: "College canteen app with live preparation status.",
+        github: "https://github.com/Safwa2909/Campus-Bites"
+    }
+};
+
+function openModal(title) {
+    document.getElementById("projectModal").style.display = "block";
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalDesc").innerText = projectData[title].desc;
+    document.getElementById("githubLink").href = projectData[title].github;
+}
+
+function closeModal() {
+    document.getElementById("projectModal").style.display = "none";
+}
+</script>
+
+
